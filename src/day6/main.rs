@@ -14,13 +14,16 @@ fn main() {
     let mut timers: Vec<Timer> = Vec::new();
 
     for i in 0..7 {
-        timers.push(Timer{value: i, count: 0});
+        timers.push(Timer { value: i, count: 0 });
     }
 
     let mut total_count: u64 = 0;
     for initial_timer in initial_timers {
         total_count += 1;
-        let elem = timers.iter_mut().find(|timer| timer.value == initial_timer).unwrap();
+        let elem = timers
+            .iter_mut()
+            .find(|timer| timer.value == initial_timer)
+            .unwrap();
         elem.count += 1;
     }
 
