@@ -120,7 +120,6 @@ fn main() {
                     }
                 }
             }
-
         }
     }
 
@@ -148,22 +147,26 @@ fn main() {
 
     println!("Part 1 result {}", beacons.len());
 
-    let max_scanner_distance: i64 = mapping.iter().map(|mut mapping_info| {
-        let mut beacon = [0, 0, 0];
-        while let Some(info) = mapping_info {
-            let (next_mapping, idx, multiplier, addition) = info;
-            let mut new_beacon = [0; 3];
-            new_beacon[0] = beacon[idx.0] * multiplier[0] + addition[0];
-            new_beacon[1] = beacon[idx.1] * multiplier[1] + addition[1];
-            new_beacon[2] = beacon[idx.2] * multiplier[2] + addition[2];
-            beacon = new_beacon;
+    let max_scanner_distance: i64 = mapping
+        .iter()
+        .map(|mut mapping_info| {
+            let mut beacon = [0, 0, 0];
+            while let Some(info) = mapping_info {
+                let (next_mapping, idx, multiplier, addition) = info;
+                let mut new_beacon = [0; 3];
+                new_beacon[0] = beacon[idx.0] * multiplier[0] + addition[0];
+                new_beacon[1] = beacon[idx.1] * multiplier[1] + addition[1];
+                new_beacon[2] = beacon[idx.2] * multiplier[2] + addition[2];
+                beacon = new_beacon;
 
-            mapping_info = &mapping[*next_mapping as usize];
-        }
-        beacon
-    }).tuple_combinations().fold(i64::MIN, |max_value, (first, second)| {
-        max_value.max(distance(&first, &second))
-    });
+                mapping_info = &mapping[*next_mapping as usize];
+            }
+            beacon
+        })
+        .tuple_combinations()
+        .fold(i64::MIN, |max_value, (first, second)| {
+            max_value.max(distance(&first, &second))
+        });
 
     println!("Part2 result {}", max_scanner_distance);
 }
