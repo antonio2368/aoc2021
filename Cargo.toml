@@ -7,6 +7,7 @@ edition = "2018"
 
 [dependencies]
 itertools = "0.10"
+threadpool = "1.8"
 
 [[bin]]
 name = "day1"
@@ -87,3 +88,7 @@ path = "src/day19/main.rs"
 [[bin]]
 name = "day20"
 path = "src/day20/main.rs"
+
+[[bin]]
+name = "day21"
+path = "src/day21/main.rs"
